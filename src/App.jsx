@@ -1,12 +1,17 @@
-import './App.css'
+import './App.css';
+import PageNav from './components/PageNav';
 
 function App() {
 
   return (
 
-    <h1 className="text-3xl font-bold underline text-red-100">
-      Hello world!
-    </h1>
+    <>
+      <PageNav />
+
+      <div className='bg-slate-200 w-full h-screen'></div>
+
+    </>
+
 
   )
 }
