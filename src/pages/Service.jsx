@@ -11,12 +11,10 @@ function Service() {
                     Welcome to
                 </h2>
 
-                <h1 className="text-3xl md:text-6xl lg:text-8xl font-black uppercase mb-8">
-                    onPoint!
-                </h1>
+                <h1 className="text-3xl md:text-6xl lg:text-8xl bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400 uppercase mb-8"> ONPOINT !</h1>
 
                 <div className="text-lg md:text-2xl lg:text-3xl py-2 px-4 md:py-4 md:px-10 lg:py-6 lg:px-12 bg-blue-400 bg-opacity-10 w-fit mx-auto mb-8 rounded-full">
-                    Hello! 
+                    Hello
                 </div>
 
 				<form 
