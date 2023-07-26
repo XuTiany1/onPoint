@@ -1,9 +1,21 @@
+
 function About() {
     return (
-        <div className='bg-slate-200 w-full h-screen flex items-center justify-center'> 
-        
-            ABOUT PAGE  - I am hitting the github thing
-        
+        <div className = "min-h-screen flex flex-col ">
+
+            <main className="container mx-auto px-6 pt-16 flex-1 text-center">
+                this is the ABOUT PAGE
+            </main>
+
+            <footer className="container mx-auto p-6 flex flex-col md:flex-row items-center justify-between">
+                <p>Built by Tianyi Xu</p>
+                <div className="flex -mx-6">
+                    <a href="" className="mx-3 hover:opacity-80 duration-150">About us</a> |
+                    <a href="" className="mx-3 hover:opacity-80 duration-150">Contact</a>
+                </div>
+            </footer>
+
+
         </div>
     )
 }
