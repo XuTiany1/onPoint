@@ -5,7 +5,7 @@ function Service() {
 
         <div className = "min-h-screen flex flex-col ">
 
-            <main className="container mx-auto px-6 pt-20 flex-1 text-center">
+            <main className="container mx-auto px-6 pt-24 flex-1 text-center">
                 
                 <h2 className="text-2xl md:text-4xl lg:text-6xl uppercase">
                     Welcome to
