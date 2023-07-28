@@ -7,6 +7,15 @@ function About() {
                 this is the ABOUT PAGE
             </main>
 
+
+
+
+
+
+
+
+
+
             <footer className="container mx-auto p-6 flex flex-col md:flex-row items-center justify-between">
                 <p>Built by Tianyi Xu</p>
                 <div className="flex -mx-6">
