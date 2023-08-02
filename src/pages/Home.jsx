@@ -5,7 +5,7 @@ function Home() {
         <div className = "min-h-screen flex flex-col ">
 
             <main className="container mx-auto px-6 pt-16 flex-1 text-center">
-                this is the HOME page, i am kinda tired today, and again today --- but imma do something tmr.., Ok... today also tired lol
+                this is the HOME page, i am kinda tired today, and again today --- but imma do something tmr.., Ok... today also tired lol okokokokoko
             </main>
 
 

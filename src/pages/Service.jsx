@@ -18,7 +18,7 @@ function Service() {
                 </div>
 
 				<form 
-					action="" 
+					action="/databaseInit" 
 					method="post" 
 					id=""
 					name=""
