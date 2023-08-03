@@ -1,8 +1,17 @@
-const mongoose = require("mongoose")
+const mongoose = require('mongoose');
 
-const schema = mongoose.Schema({
-	title: String,
-	content: String,
-})
+const Schema = mongoose.Schema;
 
-module.exports = mongoose.model("videoSummary", schema)
+const summarySchema = new Schema({
+  transactionId: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  summary: {
+    type: String,
+    required: false  
+  }
+});
+
+module.exports = mongoose.model("videoSummary", summarySchema)
