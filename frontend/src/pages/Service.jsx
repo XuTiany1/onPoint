@@ -2,6 +2,8 @@ import { useState } from "react";
 
 function Service() {
 
+
+	// |||====================== Submitting a URL to backend starts here ====================|||
 	const [url, setUrl] = useState('');
 	const [status, setStatus] = useState('');
 	const [message, setMessage] = useState('');
@@ -31,6 +33,24 @@ function Service() {
 		}
 		
 	};
+	// ========================= Submitting a URL to backend ends here =======================
+
+
+
+
+
+	// || ================== Fetching backend generated summary starts here ===================||
+
+	const [transactionId, setTransactionId] = useState('');
+	const [summary, setSummary] = useState('');
+
+	
+
+
+
+	// ===================== Fetching backend generated summary ends here ======================
+
+
 
 
 
@@ -75,25 +95,6 @@ function Service() {
 
 				</form>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             </main>
 
             <footer className="container mx-auto p-6 flex flex-col md:flex-row items-center justify-between">
@@ -104,11 +105,7 @@ function Service() {
                 </div>
             </footer>
 
-
         </div>
-
-
-
 
     )
 }

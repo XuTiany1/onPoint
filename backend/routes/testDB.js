@@ -51,7 +51,7 @@ router.get("/", function(req, res, next) {
 
 router.post("/postvideo", function(req, res, next){
 
-    const youtubeURL = "https://www.youtube.com/watch?v=1aA1WGON49E"
+    const youtubeURL = req.body.message;
 
     console.log(youtubeURL);
 
@@ -194,13 +194,11 @@ router.post("/postvideo", function(req, res, next){
 
 
 
-router.post("/findSummary", function(req, res, next){
+router.get("/findSummary:id", async function(req, res, next){
 
 
-    const hardCodedTransactionId = "d26beee0-3252-11ee-ab99-b583e28fde0b";
+    console.log("....");
 
-
-    // First, connect to database
     mongoose.connect(mongodatabaseURL, { useNewUrlParser: true})
     .then(() => {
         console.log("DATABASEE connected");
@@ -209,28 +207,75 @@ router.post("/findSummary", function(req, res, next){
         console.log(err);
     });
 
+    // let query = {_id: ObjectId(req.params.id)};
+    // let result = await collection.findOne(query);
+
+    let transactionIDFound = req.params.id.slice(1) // Removing the first unecessary character to get the transaction Id
+    let query = {
+        transactionId: transactionIDFound
+    }
+    let result = await videoSummary.findOne(query);
+
+    console.log(query);
+    console.log(result);
+
+    if (!result) res.send("Not found").status(404);
+    else res.send(result.summary).status(200);
+
+    //res.send(result);
 
 
-    // Now, I will find the specific summary that I am searching for in the database
-    videoSummary
-    .findOne({ 
-        transactionId: hardCodedTransactionId
-    })
-    .then((result) => {
+    // if (!result) res.send("Not found").status(404);
+    // else res.send(result).status(200);
 
-        if(!result){
+
+
+
+
+    // const hardCodedTransactionId = "d26beee0-3252-11ee-ab99-b583e28fde0b";
+
+
+    // // First, connect to database
+    // mongoose.connect(mongodatabaseURL, { useNewUrlParser: true})
+    // .then(() => {
+    //     console.log("DATABASEE connected");
+    // })
+    // .catch((err) => {
+    //     console.log(err);
+    // });
+
+
+    // let query = {_id: ObjectId(req.params.id)};
+    // let result = await collection.findOne(query);
+
+    // console.log(query);
+
+    // if (!result) res.send("Not found").status(404);
+    // else res.send(result).status(200);
+
+
+
+
+    // // Now, I will find the specific summary that I am searching for in the database
+    // videoSummary
+    // .findOne({ 
+    //     transactionId: hardCodedTransactionId
+    // })
+    // .then((result) => {
+
+    //     if(!result){
             
-            return res.send('Please check it later. The process is ongoing for : ' + hardCodedTransactionId);
+    //         return res.send('Please check it later. The process is ongoing for : ' + hardCodedTransactionId);
 
-        }
+    //     }
 
-        res.send(result.summary);
+    //     res.send(result.summary);
 
-    }).catch((err) => {
-        // If there is error, return the error
-        return next(err); 
+    // }).catch((err) => {
+    //     // If there is error, return the error
+    //     return next(err); 
 
-    })
+    // })
 
 })
 
