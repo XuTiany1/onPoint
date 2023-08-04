@@ -1,4 +1,4 @@
-
+import Form from "../assets/Form";
 
 function Service() {
     return (
@@ -17,7 +17,9 @@ function Service() {
                     Hello
                 </div>
 
-				<form 
+				<div> <Form/> </div>
+
+				{/* <form 
 					action="/databaseInit" 
 					method="post" 
 					id=""
@@ -45,7 +47,7 @@ function Service() {
 						After entering your video link, the summary will be generated down below!
 					</div>
 
-				</form>
+				</form> */}
 
 
 
