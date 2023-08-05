@@ -1,4 +1,5 @@
-import { useState } from "react";
+import React, { useState , useEffect } from "react";
+import axios from 'axios';
 
 function Service() {
 
@@ -43,8 +44,23 @@ function Service() {
 
 	const [transactionId, setTransactionId] = useState('');
 	const [summary, setSummary] = useState('');
+	const [error, setError] = React.useState(null);
 
-	
+	const baseURL = "http://localhost:1000/testDB/findSummary:d26beee0-3252-11ee-ab99-b583e28fde0b";
+
+
+	console.log('REACHED HERE');
+
+
+	React.useEffect(() => {
+		axios.get(baseURL).then((response) => {
+			setSummary(response.data);
+		}).catch(error => {
+			setError(error);
+		});
+	}, []);
+
+	console.log(`${summary.summary}`);
 
 
 
@@ -93,7 +109,10 @@ function Service() {
 						After entering your video link, the summary will be generated down below!
 					</div>
 
+					<div><p>{summary.summary}</p></div>
+
 				</form>
+
 
             </main>
 
