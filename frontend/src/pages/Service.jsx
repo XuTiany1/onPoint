@@ -4,7 +4,8 @@ import axios from 'axios';
 function Service() {
 
 
-	// |||====================== Submitting a URL to backend starts here ====================|||
+// |||====================== Submitting a URL to backend starts here ====================|||
+
 	const [url, setUrl] = useState('');
 	const [status, setStatus] = useState('');
 	const [message, setMessage] = useState('');
@@ -13,17 +14,28 @@ function Service() {
 		e.preventDefault();
 		setStatus('loading');
 		setMessage('');
+
+		console.log("Start to handle submit");
 		
 		try {
-			let res = await fetch("http://localhost:1000/testDB/postvideo", {
-			method: "POST",
-			body: JSON.stringify({
-			url: url,
-			}),
-		});
-		let resJson = await res.json();
 
-		if (res.status === 200) {
+			const rawResponse = await fetch('http://localhost:1000/testDB/postvideo', {
+				method: 'POST',
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json',
+					'Access-Control-Allow-Origin': 'http://localhost:1000'
+				},
+				body: JSON.stringify({
+					youtube_url: url,
+				})
+			});
+			
+
+		const content = await rawResponse.json();
+		console.log(content);
+
+		if (content.status === 200) {
 			setUrl("")
 			setMessage("Url Successfully Uploaded");
 		} else {
@@ -34,41 +46,68 @@ function Service() {
 		}
 		
 	};
-	// ========================= Submitting a URL to backend ends here =======================
+// ========================= Submitting a URL to backend ENDS here =======================
 
 
 
 
 
-	// || ================== Fetching backend generated summary starts here ===================||
+
+
+// || ================== Fetching backend generated summary starts here ===================||
+
 
 	const [transactionId, setTransactionId] = useState('');
 	const [summary, setSummary] = useState('');
 	const [error, setError] = React.useState(null);
 
-	const baseURL = "http://localhost:1000/testDB/findSummary:d26beee0-3252-11ee-ab99-b583e28fde0b";
 
 
-	console.log('REACHED HERE');
+	const handleFetchSummary = async (e) => {
 
+		e.preventDefault();
 
-	React.useEffect(() => {
-		axios.get(baseURL).then((response) => {
+		console.log("Start to try to get summary");
+
+		const baseURL = "http://localhost:1000/testDB/findSummary:d26beee0-3252-11ee-ab99-b583e28fde0b";
+
+		await axios.get(baseURL).then((response) => {
+
+			console.log(response);
+
 			setSummary(response.data);
+
+
 		}).catch(error => {
 			setError(error);
 		});
-	}, []);
 
-	console.log(`${summary.summary}`);
-
+		console.log(`The summary is found: ${summary}`);
 
 
-	// ===================== Fetching backend generated summary ends here ======================
+	}
 
 
 
+	// const baseURL = "http://localhost:1000/testDB/findSummary:d26beee0-3252-11ee-ab99-b583e28fde0b";
 
+
+	// console.log('REACHED HERE');
+
+
+	// React.useEffect(() => {
+	// 	axios.get(baseURL).then((response) => {
+	// 		setSummary(response.data);
+	// 	}).catch(error => {
+	// 		setError(error);
+	// 	});
+	// }, []);
+
+	// console.log(`The summary is found: ${summary.summary}`);
+
+
+
+// ===================== Fetching backend generated summary ENDS here ======================
 
     return (
 
@@ -105,13 +144,45 @@ function Service() {
 						/>
 					</div>
 
-					<div className="opacity-75 italic">
-						After entering your video link, the summary will be generated down below!
-					</div>
-
-					<div><p>{summary.summary}</p></div>
 
 				</form>
+
+
+
+				<form onSubmit={handleFetchSummary}>
+				<input
+							type="submit"
+							value="Get Summary"
+							className=" bg-blue-300 md:rounded-tl-none md:rounded-bl-none rounded-full text-2xl py-4 px-6 md:px-10 lg:py-6 lg:px-12 font-bold uppercase cursor-pointer hover:opacity-75 duration-150"
+						/>
+				</form>
+
+				<div className="opacity-75 italic">
+						After entering your video link, the summary will be generated down below!
+				</div>
+
+				<div className="opacity-75 italic">
+					And here is your summary: {summary}
+				</div>
+				
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
             </main>
@@ -124,7 +195,11 @@ function Service() {
                 </div>
             </footer>
 
+
         </div>
+
+
+
 
     )
 }

@@ -221,61 +221,7 @@ router.get("/findSummary:id", async function(req, res, next){
 
     if (!result) res.send("Not found").status(404);
     else res.send(result.summary).status(200);
-
-    //res.send(result);
-
-
-    // if (!result) res.send("Not found").status(404);
-    // else res.send(result).status(200);
-
-
-
-
-
-    // const hardCodedTransactionId = "d26beee0-3252-11ee-ab99-b583e28fde0b";
-
-
-    // // First, connect to database
-    // mongoose.connect(mongodatabaseURL, { useNewUrlParser: true})
-    // .then(() => {
-    //     console.log("DATABASEE connected");
-    // })
-    // .catch((err) => {
-    //     console.log(err);
-    // });
-
-
-    // let query = {_id: ObjectId(req.params.id)};
-    // let result = await collection.findOne(query);
-
-    // console.log(query);
-
-    // if (!result) res.send("Not found").status(404);
-    // else res.send(result).status(200);
-
-
-
-
-    // // Now, I will find the specific summary that I am searching for in the database
-    // videoSummary
-    // .findOne({ 
-    //     transactionId: hardCodedTransactionId
-    // })
-    // .then((result) => {
-
-    //     if(!result){
-            
-    //         return res.send('Please check it later. The process is ongoing for : ' + hardCodedTransactionId);
-
-    //     }
-
-    //     res.send(result.summary);
-
-    // }).catch((err) => {
-    //     // If there is error, return the error
-    //     return next(err); 
-
-    // })
+    
 
 })
 
