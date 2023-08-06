@@ -15,7 +15,6 @@ var app = express();
 
 
 // Setting up CORS
-
 app.use(cors({
   origin: '*'
 }));

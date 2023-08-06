@@ -187,7 +187,11 @@ router.post("/postvideo", function(req, res, next){
 
     })
 
-    res.send("Proecssing the video. The transactionID is : " + transactionId);
+    res.send(
+        {
+             responseTransactionId: transactionId
+        }
+        );
 
 })
 
@@ -221,7 +225,7 @@ router.get("/findSummary:id", async function(req, res, next){
 
     if (!result) res.send("Not found").status(404);
     else res.send(result.summary).status(200);
-    
+
 
 })
 

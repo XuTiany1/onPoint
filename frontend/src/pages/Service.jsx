@@ -9,6 +9,7 @@ function Service() {
 	const [url, setUrl] = useState('');
 	const [status, setStatus] = useState('');
 	const [message, setMessage] = useState('');
+	const [transactionId, setTransactionId] = useState('');
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -24,16 +25,19 @@ function Service() {
 				headers: {
 					'Accept': 'application/json',
 					'Content-Type': 'application/json',
-					'Access-Control-Allow-Origin': 'http://localhost:1000'
 				},
 				body: JSON.stringify({
 					youtube_url: url,
 				})
 			});
-			
+
 
 		const content = await rawResponse.json();
-		console.log(content);
+		setTransactionId(content.responseTransactionId);
+
+		console.log(transactionId);
+
+
 
 		if (content.status === 200) {
 			setUrl("")
@@ -42,7 +46,7 @@ function Service() {
 			setMessage("Some error occured");
 		}
 		} catch (err) {
-		console.log(err);
+			console.log(err);
 		}
 		
 	};
@@ -56,8 +60,6 @@ function Service() {
 
 // || ================== Fetching backend generated summary starts here ===================||
 
-
-	const [transactionId, setTransactionId] = useState('');
 	const [summary, setSummary] = useState('');
 	const [error, setError] = React.useState(null);
 
@@ -69,7 +71,7 @@ function Service() {
 
 		console.log("Start to try to get summary");
 
-		const baseURL = "http://localhost:1000/testDB/findSummary:d26beee0-3252-11ee-ab99-b583e28fde0b";
+		const baseURL = `http://localhost:1000/testDB/findSummary:${transactionId}`;
 
 		await axios.get(baseURL).then((response) => {
 
@@ -77,13 +79,11 @@ function Service() {
 
 			setSummary(response.data);
 
-
 		}).catch(error => {
 			setError(error);
 		});
 
 		console.log(`The summary is found: ${summary}`);
-
 
 	}
 
@@ -165,27 +165,7 @@ function Service() {
 					And here is your summary: {summary}
 				</div>
 				
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            </main>
+            </main> 
 
             <footer className="container mx-auto p-6 flex flex-col md:flex-row items-center justify-between">
                 <p>Built by Tianyi Xu</p>
