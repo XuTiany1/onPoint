@@ -8,10 +8,23 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var testAPIRouter = require("./routes/testAPI");
 var testDBRouter = require("./routes/testDB");
-
+const cors = require('cors');
 
 
 var app = express();
+
+
+// Setting up CORS
+
+app.use(cors({
+  origin: '*'
+}));
+
+app.use(cors({
+  methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']
+}));
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

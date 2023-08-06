@@ -51,7 +51,7 @@ router.get("/", function(req, res, next) {
 
 router.post("/postvideo", function(req, res, next){
 
-    const youtubeURL = req.body.message;
+    const youtubeURL = req.body.youtube_url;
 
     console.log(youtubeURL);
 
@@ -280,5 +280,3 @@ router.get("/findSummary:id", async function(req, res, next){
 })
 
 module.exports = router
-
-
