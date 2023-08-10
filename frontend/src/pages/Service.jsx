@@ -137,11 +137,12 @@ function Service() {
 							onChange={(e) => setUrl(e.target.value)}
 							className="text-2xl placeholder:text-gray-400 placeholder:italic py-4 px-6 md:px-10 lg:py-6 lg:px-12 bg-white bg-opacity-10 focus:bg-opacity-20 duration-150 md:rounded-tr-none md:rounded-br-none rounded-full outline-none mb-4 md:mb-0"
 						/>
-						<input
+						<button
 							type="submit"
-							value="SUBMIT!"
 							className=" bg-blue-300 md:rounded-tl-none md:rounded-bl-none rounded-full text-2xl py-4 px-6 md:px-10 lg:py-6 lg:px-12 font-bold uppercase cursor-pointer hover:opacity-75 duration-150"
-						/>
+						>
+							Submit!
+						</button>
 					</div>
 
 
