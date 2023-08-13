@@ -71,7 +71,7 @@ function Service() {
 
 		console.log("Start to try to get summary");
 
-		const baseURL = `http://localhost:1000/videoSummary/findSummary:${transactionId}`;
+		const baseURL = `http://localhost:1000/videoSummary/getSummary/${transactionId}`;
 
 		await axios.get(baseURL).then((response) => {
 
