@@ -111,61 +111,69 @@ function Service() {
 
     return (
 
-        <div className = "min-h-screen flex flex-col ">
+        <div className = "min-h-screen flex flex-col inset-0 bottom-10 bg-bottom bg-no-repeat bg-slate-50 dark:bg-[#0B1120] index_beams__yWcJT"
+		>
 
-            <main className="container mx-auto px-6 pt-24 flex-1 text-center">
+            <main className="container mx-auto px-6 pt-24 flex-1">
+
                 
-                <h2 className="text-2xl md:text-4xl lg:text-6xl uppercase">
-                    Welcome to
+                <h2 className="text-5xl md:text-6xl font-extrabold leading-tighter tracking-tighter mb-4 aos-init aos-animate text-center">
+                    Summarize Your Video With 
                 </h2>
 
-                <h1 className="text-3xl md:text-6xl lg:text-8xl bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400 uppercase mb-8"> ONPOINT !</h1>
-
-                <div className="text-lg md:text-2xl lg:text-3xl py-2 px-4 md:py-4 md:px-10 lg:py-6 lg:px-12 bg-blue-400 bg-opacity-10 w-fit mx-auto mb-8 rounded-full">
-                    Hello
-                </div>
-	
-
-
-				<form onSubmit={handleSubmit} >
-
-					<div className="flex flex-col md:flex-row justify-center mb-4">
-						<input
-							placeholder="Your video link..."
-							type="url"
-							value={url}
-							onChange={(e) => setUrl(e.target.value)}
-							className="text-2xl placeholder:text-gray-400 placeholder:italic py-4 px-6 md:px-10 lg:py-6 lg:px-12 bg-white bg-opacity-10 focus:bg-opacity-20 duration-150 md:rounded-tr-none md:rounded-br-none rounded-full outline-none mb-4 md:mb-0"
-						/>
-						<button
-							type="submit"
-							className=" bg-blue-300 md:rounded-tl-none md:rounded-bl-none rounded-full text-2xl py-4 px-6 md:px-10 lg:py-6 lg:px-12 font-bold uppercase cursor-pointer hover:opacity-75 duration-150"
-						>
-							Submit!
-						</button>
-					</div>
-
-
-				</form>
+                <h1 className="text-5xl md:text-6xl font-extrabold leading-tighter tracking-tighter aos-init aos-animate bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400 uppercase mb-8 text-center"> ONPOINT !</h1>
 
 
 
-				<form onSubmit={handleFetchSummary}>
-				<input
-							type="submit"
-							value="Get Summary"
-							className=" bg-blue-300 md:rounded-tl-none md:rounded-bl-none rounded-full text-2xl py-4 px-6 md:px-10 lg:py-6 lg:px-12 font-bold uppercase cursor-pointer hover:opacity-75 duration-150"
-						/>
-				</form>
 
-				<div className="opacity-75 italic">
-						After entering your video link, the summary will be generated down below!
+				<div className="max-w-3xl mx-auto">
+
+
+					<p className="text-xl text-gray-600 mb-8 aos-init aos-animate text-center" data-aos="zoom-y-out" data-aos-delay="150">
+						Our landing page template works on all devices, so you only have to set it up once, and get beautiful results forever.
+					</p>
+
+
+					<form onSubmit={handleSubmit} >
+						<div className="mt-6 sm:mt-10 flex justify-center space-x-6 text-sm">
+							<button 
+								type="submit"
+								className="bg-slate-900 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-6 rounded-lg w-full flex items-center justify-center sm:w-auto dark:bg-sky-500 dark:highlight-white/20 dark:hover:bg-sky-400">
+								Start Processing!
+							</button>
+
+							<input 
+								type="url"
+								placeholder="Your video link..."
+								value={url}
+								onChange={(e) => setUrl(e.target.value)}
+								className="hidden sm:flex items-center w-72 text-left space-x-3 px-4 h-12 bg-white ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700"/>
+						</div>
+					</form>
 				</div>
 
-				<div className="opacity-75 italic">
-					And here is your summary: {summary}
+				<div className="max-w-3xl mx-auto">
+
+					<form onSubmit={handleFetchSummary}>
+							<button 
+								type="submit"
+								className="bg-sky-500 hover:bg-sky-400 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-6 rounded-lg w-full flex items-center justify-center sm:w-auto dark:bg-sky-500 dark:highlight-white/20 dark:hover:bg-sky-400">
+										Fetch Summary!
+							</button>
+					</form>
+
+
+					<p>Summary Displayed Below:</p>
+
+					<p>{summary}</p>
+
 				</div>
-				
+
+
+
+
+
+
             </main> 
 
             <footer className="container mx-auto p-6 flex flex-col md:flex-row items-center justify-between">
