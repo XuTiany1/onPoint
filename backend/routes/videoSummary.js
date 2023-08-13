@@ -13,10 +13,10 @@ const router = express.Router();
   
 /* READ */
 router.get("/", landingFunction);
-router.get("/:transactionid", getSummary);
+router.get("/getSummary/:id", getSummary);
   
 /* POST */
-router.patch("/postVideo", postVideo);
+router.post("/postVideo", postVideo);
 
 
 module.exports = router

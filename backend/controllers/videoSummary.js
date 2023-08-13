@@ -59,7 +59,11 @@ const getSummary = async(req, res, next) => {
     // let query = {_id: ObjectId(req.params.id)};
     // let result = await collection.findOne(query);
 
-    let transactionIDFound = req.params.id.slice(1) // Removing the first unecessary character to get the transaction Id
+    // res.send(req.params.id);
+
+    let transactionIDFound = req.params.id 
+    console.log("THIS IS THE TRANSACTION ID" + transactionIDFound);
+    
     let query = {
         transactionId: transactionIDFound
     }

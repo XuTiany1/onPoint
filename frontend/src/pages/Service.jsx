@@ -20,7 +20,7 @@ function Service() {
 		
 		try {
 
-			const rawResponse = await fetch('http://localhost:1000/testDB/postvideo', {
+			const rawResponse = await fetch('http://localhost:1000/videoSummary/postVideo', {
 				method: 'POST',
 				headers: {
 					'Accept': 'application/json',
@@ -71,7 +71,7 @@ function Service() {
 
 		console.log("Start to try to get summary");
 
-		const baseURL = `http://localhost:1000/testDB/findSummary:${transactionId}`;
+		const baseURL = `http://localhost:1000/videoSummary/findSummary:${transactionId}`;
 
 		await axios.get(baseURL).then((response) => {
 
@@ -86,24 +86,6 @@ function Service() {
 		console.log(`The summary is found: ${summary}`);
 
 	}
-
-
-
-	// const baseURL = "http://localhost:1000/testDB/findSummary:d26beee0-3252-11ee-ab99-b583e28fde0b";
-
-
-	// console.log('REACHED HERE');
-
-
-	// React.useEffect(() => {
-	// 	axios.get(baseURL).then((response) => {
-	// 		setSummary(response.data);
-	// 	}).catch(error => {
-	// 		setError(error);
-	// 	});
-	// }, []);
-
-	// console.log(`The summary is found: ${summary.summary}`);
 
 
 
