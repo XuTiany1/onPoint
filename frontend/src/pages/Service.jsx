@@ -7,14 +7,10 @@ function Service() {
 // |||====================== Submitting a URL to backend starts here ====================|||
 
 	const [url, setUrl] = useState('');
-	const [status, setStatus] = useState('');
-	const [message, setMessage] = useState('');
 	const [transactionId, setTransactionId] = useState('');
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		setStatus('loading');
-		setMessage('');
 
 		console.log("Start to handle submit");
 		
@@ -37,13 +33,10 @@ function Service() {
 
 		console.log(transactionId);
 
-
-
 		if (content.status === 200) {
-			setUrl("")
-			setMessage("Url Successfully Uploaded");
+			console.log("success")
 		} else {
-			setMessage("Some error occured");
+			console.log("something went wrong")
 		}
 		} catch (err) {
 			console.log(err);
@@ -61,7 +54,6 @@ function Service() {
 // || ================== Fetching backend generated summary starts here ===================||
 
 	const [summary, setSummary] = useState('');
-	const [error, setError] = React.useState(null);
 
 
 
@@ -80,7 +72,7 @@ function Service() {
 			setSummary(response.data);
 
 		}).catch(error => {
-			setError(error);
+			console.log(error);
 		});
 
 		console.log(`The summary is found: ${summary}`);
