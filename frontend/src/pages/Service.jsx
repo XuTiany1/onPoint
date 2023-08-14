@@ -1,5 +1,6 @@
-import React, { useState , useEffect } from "react";
+import React, { useState , useEffect, useCallback } from "react";
 import axios from 'axios';
+import { useInterval } from 'usehooks-ts';
 
 function Service() {
 
@@ -8,8 +9,10 @@ function Service() {
 
 	const [url, setUrl] = useState('');
 	const [transactionId, setTransactionId] = useState('');
+	const [status, setStatus] = useState(false);
 
 	const handleSubmit = async (e) => {
+		setTransactionId('');
 		e.preventDefault();
 
 		console.log("Start to handle submit");
@@ -32,15 +35,19 @@ function Service() {
 		setTransactionId(content.responseTransactionId);
 
 		console.log(transactionId);
+		console.log(content);
+		console.log(content.status);
 
 		if (content.status === 200) {
-			console.log("success")
+			console.log("success");
 		} else {
-			console.log("something went wrong")
+			console.log("something went wrong");
 		}
 		} catch (err) {
 			console.log(err);
 		}
+
+		setStatus(true);
 		
 	};
 // ========================= Submitting a URL to backend ENDS here =======================
@@ -55,29 +62,96 @@ function Service() {
 
 	const [summary, setSummary] = useState('');
 
+	useInterval(() => {
+
+		console.log("hi");
+		const handleFetchSummary = async () => {
+
+			console.log("Start to try to get summary");
+	
+			const baseURL = `http://localhost:1000/videoSummary/getSummary/${transactionId}`;
+	
+			await axios.get(baseURL).then((response) => {
+	
+				console.log(response);
+				console.log(`this is the response.data: ${response.data}`)
+
+		
+				if(response.data != ''){
+					console.log(response.data);
+					setSummary(response.data);
+					console.log(`The summary is found: ${summary}`);
+				}else{
+					console.log("keep waiting!")
+				}
+	
+			}).catch(error => {
+				console.log(error);
+			});
+
+		}
+
+		handleFetchSummary();
+
+	},10000)
+
+	// useEffect(() => {
+
+	// 	console.log(`hi, the transactionId is now set to => ${transactionId}`);
+
+	// 	const anAsyncFunction = async() =>{
+	// 		console.log("hiiiii async function here")
+	// 		if(transactionId !== ''){
+	// 			console.log(`Transaction id is not null! It is ${transactionId}`);
+
+	// 			console.log("Start to try to get summary");
+
+	// 			const baseURL = `http://localhost:1000/videoSummary/getSummary/${transactionId}`;
+	
+	// 			await axios.get(baseURL).then((response) => {
+	
+	// 				console.log(response);
+	
+	// 				setSummary(response.data);
+	
+	// 			}).catch(error => {
+	// 				console.log(error);
+	// 			});
+	
+	// 			console.log(`The summary is found: ${summary}`);
+	// 		}
+
+	// 	}
+
+	// 	anAsyncFunction();
+
+	// }, [transactionId])
 
 
-	const handleFetchSummary = async (e) => {
+	// const handleFetchSummary = async (e) => {
 
-		e.preventDefault();
+	// 	e.preventDefault();
 
-		console.log("Start to try to get summary");
+	// 	console.log("Start to try to get summary");
 
-		const baseURL = `http://localhost:1000/videoSummary/getSummary/${transactionId}`;
+	// 	const baseURL = `http://localhost:1000/videoSummary/getSummary/${transactionId}`;
 
-		await axios.get(baseURL).then((response) => {
+	// 	await axios.get(baseURL).then((response) => {
 
-			console.log(response);
+	// 		console.log(response);
 
-			setSummary(response.data);
+	// 		setSummary(response.data);
 
-		}).catch(error => {
-			console.log(error);
-		});
+	// 	}).catch(error => {
+	// 		console.log(error);
+	// 	});
 
-		console.log(`The summary is found: ${summary}`);
+	// 	console.log(`The summary is found: ${summary}`);
 
-	}
+	// }
+
+
+
 
 
 
@@ -128,13 +202,13 @@ function Service() {
 
 				<div className="max-w-3xl mx-auto">
 
-					<form onSubmit={handleFetchSummary}>
+					{/* <form onSubmit={handleFetchSummary}>
 							<button 
 								type="submit"
 								className="bg-sky-500 hover:bg-sky-400 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-6 rounded-lg w-full flex items-center justify-center sm:w-auto dark:bg-sky-500 dark:highlight-white/20 dark:hover:bg-sky-400">
 										Fetch Summary!
 							</button>
-					</form>
+					</form> */}
 
 
 					<p>Summary Displayed Below:</p>

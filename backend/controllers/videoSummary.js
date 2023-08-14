@@ -198,7 +198,10 @@ const postVideo = async(req, res, next) => {
                 // We can only save a summary once we have created it!
                 // Hence, we have an 'await' at the start here
                 await newVideoSummary.save()
-                .then(() => console.log('new Summary created'))
+                .then(() => {
+                    console.log('new Summary created')
+                    res.send({ responseTransactionId: transactionId });
+                })
                 .catch((err) => console.log(err));
 
                 return;
@@ -218,11 +221,7 @@ const postVideo = async(req, res, next) => {
 
     })
 
-    res.send(
-        {
-             responseTransactionId: transactionId
-        }
-        );
+    // res.send({ responseTransactionId: transactionId });
 
 }
 
