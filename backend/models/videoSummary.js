@@ -8,7 +8,15 @@ const summarySchema = new Schema({
     required: true,
     unique: true
   },
-  summary: {
+  gistSummary: {
+    type: String,
+    required: false  
+  },
+  headlineSummary: {
+    type: String,
+    required: false  
+  },
+  bulletSummary: {
     type: String,
     required: false  
   }

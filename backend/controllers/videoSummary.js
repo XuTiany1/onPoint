@@ -122,23 +122,52 @@ const postVideo = async(req, res, next) => {
         console.log(audioUrl);
     
 
-// Step 4: Feed Assembly AI with our request
+// Step 4: Feed Assembly AI with our request 
 
         // First, we define the type of data we are providing as well as the type of summary response we want to get back
-        const data = {
+        
+        const gistData = {
+            audio_url: audioUrl,
+            summarization: true,
+            summary_model: 'catchy',
+            summary_type: 'gist'
+        }
+
+        const headlineData = {
+            audio_url: audioUrl,
+            summarization: true,
+            summary_model: 'informative',
+            summary_type: 'headline'
+        }
+        
+        const bulletData = {
             audio_url: audioUrl,
             summarization: true,
             summary_model: 'informative',
             summary_type: 'bullets'
         }
 
+        
+
         // Now, we POST (WITH THE DATA DEFINED ABOVE) to Assembly AI in order to get a JSON object that contains the transcript of our audio file IN the format that we specified in 'data
-        const response = await axios.post(transcriptUrl, data, {
+        
+        const gistResponse = await axios.post(transcriptUrl, gistData, {
             headers: headers // here, we are just giving our Assembly AI key
         })
 
+        const headlineResponse = await axios.post(transcriptUrl, headlineData, {
+            headers: headers // here, we are just giving our Assembly AI key
+        })
+        
+        const bulletResponse = await axios.post(transcriptUrl, bulletData, {
+            headers: headers // here, we are just giving our Assembly AI key
+        })
+
+
         // Transcript ID will be the 'key' with which we can then put at the end of another URL to retrieve the final values from Assembly AI
-        const transcriptId = response.data.id;
+        const gistTranscriptId = gistResponse.data.id;
+        const headlineTranscriptId = headlineResponse.data.id;
+        const bulletTranscriptId = bulletResponse.data.id;
 
         // Remove the no longer needed audio file 
         await fs.unlink('audio.mp4', (err) => {
@@ -149,29 +178,50 @@ const postVideo = async(req, res, next) => {
 
         });
 
-        console.log(transcriptId);
+        console.log(gistTranscriptId);
+        console.log(headlineTranscriptId);
+        console.log(bulletTranscriptId);
+
 
 // Step 5: Getting our final response from Assembly AI
 
         // First, in order to get our final response from Assembly AI, we will need to know where to get it from this API
         // This will need to use the 'transcriptId' that was given in the previous step
-        const pollingEndpoint = `https://api.assemblyai.com/v2/transcript/${transcriptId}`;
 
-        console.log(pollingEndpoint);
+        const gistPollingEndpoint = `https://api.assemblyai.com/v2/transcript/${gistTranscriptId}`;
+        const headlinePollingEndpoint = `https://api.assemblyai.com/v2/transcript/${headlineTranscriptId}`;
+        const bulletPollingEndpoint = `https://api.assemblyai.com/v2/transcript/${bulletTranscriptId}`;
 
-        // Now, I will keep on polling from Assembly AI UNTIL I get my response back!
+        console.log(gistPollingEndpoint);
+        console.log(headlinePollingEndpoint);
+        console.log(bulletPollingEndpoint);
+
+
         while(true){
 
             // Send a FETCH request to the polling endpoint to retrieve the status of the transcript
-            const pollingResponse = await fetch(pollingEndpoint, { 
+            const gistPollingResponse = await fetch(gistPollingEndpoint, { 
                 headers 
             });
-            const transcriptionResult = await pollingResponse.json();
 
-            // If the transcription process is complete by Assembly AI, I will store that object into mongoDB
-            if(transcriptionResult.status === "completed"){
-                console.log(transcriptionResult);
+            // Send a FETCH request to the polling endpoint to retrieve the status of the transcript
+            const headlinePollingResponse = await fetch(headlinePollingEndpoint, { 
+                headers 
+            });
 
+            // Send a FETCH request to the polling endpoint to retrieve the status of the transcript
+            const bulletPollingResponse = await fetch(bulletPollingEndpoint, { 
+                headers 
+            });
+            const gistTranscriptionResult = await gistPollingResponse.json();
+            const headlineTranscriptionResult = await headlinePollingResponse.json();
+            const bulletTranscriptionResult = await bulletPollingResponse.json();
+
+            if(gistTranscriptionResult.status === "completed" && headlineTranscriptionResult.status === "completed" && bulletTranscriptionResult.status === "completed"){
+
+                console.log(gistTranscriptionResult);
+                console.log(headlineTranscriptionResult);
+                console.log(bulletTranscriptionResult);
 
                 // Connect to database
                 mongoose.connect(mongodatabaseURL, { useNewUrlParser: true})
@@ -187,7 +237,9 @@ const postVideo = async(req, res, next) => {
                 // Create new videoSummary object to be stored into database
                 const newVideoSummary = new videoSummary({
                     transactionId: transactionId,
-                    summary: transcriptionResult.summary
+                    gistSummary: gistTranscriptionResult.summary,
+                    headlineSummary: headlineTranscriptionResult.summary,
+                    bulletSummary: bulletTranscriptionResult.summary
                 });
 
                 // We can only save a summary once we have created it!
@@ -198,11 +250,9 @@ const postVideo = async(req, res, next) => {
                     res.send({ responseTransactionId: transactionId });
                 })
                 .catch((err) => console.log(err));
-
-                return;
-            }else if(transcriptionResult.status === "error"){
+            }else if(gistPollingResponse.status === "error" || headlineTranscriptionResult.status === "error" || bulletTranscriptionResult.status === "error" ){
                 // If the transaction result ever fails, I will throw an error
-                throw new Error(`Transcription failed: ${transcriptionResult.error}`);
+                throw new Error(`Transcription failed`);
             }else{
 
                 // This will be the most probable case => TRANSACTION IS STILL IN PROGRESS
@@ -213,6 +263,65 @@ const postVideo = async(req, res, next) => {
             }
 
         }
+
+
+
+
+
+        // // Now, I will keep on polling from Assembly AI UNTIL I get my response back!
+        // while(true){
+
+        //     // Send a FETCH request to the polling endpoint to retrieve the status of the transcript
+        //     const pollingResponse = await fetch(pollingEndpoint, { 
+        //         headers 
+        //     });
+        //     const transcriptionResult = await pollingResponse.json();
+
+        //     // If the transcription process is complete by Assembly AI, I will store that object into mongoDB
+        //     if(transcriptionResult.status === "completed"){
+        //         console.log(transcriptionResult);
+
+
+        //         // Connect to database
+        //         mongoose.connect(mongodatabaseURL, { useNewUrlParser: true})
+        //         .then(() => {
+        //             console.log("DATABASEE connected");
+        //             databaseConnection = "Connected to Database";
+        //         })
+        //         .catch((err) => {
+        //             console.log(err);
+        //             databaseConnection = "Error connecting to Database";
+        //         });
+
+        //         // Create new videoSummary object to be stored into database
+        //         const newVideoSummary = new videoSummary({
+        //             transactionId: transactionId,
+        //             summary: transcriptionResult.summary
+        //         });
+
+        //         // We can only save a summary once we have created it!
+        //         // Hence, we have an 'await' at the start here
+        //         await newVideoSummary.save()
+        //         .then(() => {
+        //             console.log('new Summary created')
+        //             res.send({ responseTransactionId: transactionId });
+        //         })
+        //         .catch((err) => console.log(err));
+
+        //         return;
+        //     }else if(transcriptionResult.status === "error"){
+        //         // If the transaction result ever fails, I will throw an error
+        //         throw new Error(`Transcription failed: ${transcriptionResult.error}`);
+        //     }else{
+
+        //         // This will be the most probable case => TRANSACTION IS STILL IN PROGRESS
+        //         // in this case, we will wait for a few seconds before attempting to poll again
+        //         console.log("Transaction in progress");
+        //         await new Promise((resolve) => setTimeout(resolve, 3000));
+
+        //     }
+
+        // }
 
     })
 
