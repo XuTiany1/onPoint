@@ -72,8 +72,8 @@ function Service() {
 
 			console.log("Start to try to get summary");
 	
-			// const baseURL = `http://localhost:1000/videoSummary/getSummary/${transactionId}`;
-			const baseURL = `http://localhost:1000/videoSummary/getSummary/782423d0-3b9e-11ee-86a9-d5900191e1e2`;
+			const baseURL = `http://localhost:1000/videoSummary/getSummary/${transactionId}`;
+
 	
 			await axios.get(baseURL).then((response) => {
 	
@@ -130,7 +130,7 @@ function Service() {
 
 
 					<p className="text-xl text-gray-600 mb-8 aos-init aos-animate text-center" data-aos="zoom-y-out" data-aos-delay="150">
-						Our landing page template works on all devices, so you only have to set it up once, and get beautiful results forever.
+						OnPoint provides concise summary from time-consuming video, so you only have to enter the enter the link and start saving time! 
 					</p>
 
 
