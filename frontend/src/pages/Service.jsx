@@ -9,7 +9,6 @@ function Service() {
 
 	const [url, setUrl] = useState('');
 	const [transactionId, setTransactionId] = useState('');
-	const [status, setStatus] = useState(false);
 
 	const handleSubmit = async (e) => {
 		setTransactionId('');
@@ -47,7 +46,9 @@ function Service() {
 			console.log(err);
 		}
 
-		setStatus(true);
+		setUrl('');
+
+
 		
 	};
 // ========================= Submitting a URL to backend ENDS here =======================
@@ -94,66 +95,6 @@ function Service() {
 		handleFetchSummary();
 
 	},10000)
-
-	// useEffect(() => {
-
-	// 	console.log(`hi, the transactionId is now set to => ${transactionId}`);
-
-	// 	const anAsyncFunction = async() =>{
-	// 		console.log("hiiiii async function here")
-	// 		if(transactionId !== ''){
-	// 			console.log(`Transaction id is not null! It is ${transactionId}`);
-
-	// 			console.log("Start to try to get summary");
-
-	// 			const baseURL = `http://localhost:1000/videoSummary/getSummary/${transactionId}`;
-	
-	// 			await axios.get(baseURL).then((response) => {
-	
-	// 				console.log(response);
-	
-	// 				setSummary(response.data);
-	
-	// 			}).catch(error => {
-	// 				console.log(error);
-	// 			});
-	
-	// 			console.log(`The summary is found: ${summary}`);
-	// 		}
-
-	// 	}
-
-	// 	anAsyncFunction();
-
-	// }, [transactionId])
-
-
-	// const handleFetchSummary = async (e) => {
-
-	// 	e.preventDefault();
-
-	// 	console.log("Start to try to get summary");
-
-	// 	const baseURL = `http://localhost:1000/videoSummary/getSummary/${transactionId}`;
-
-	// 	await axios.get(baseURL).then((response) => {
-
-	// 		console.log(response);
-
-	// 		setSummary(response.data);
-
-	// 	}).catch(error => {
-	// 		console.log(error);
-	// 	});
-
-	// 	console.log(`The summary is found: ${summary}`);
-
-	// }
-
-
-
-
-
 
 // ===================== Fetching backend generated summary ENDS here ======================
 
