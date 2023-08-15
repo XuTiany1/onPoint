@@ -200,6 +200,20 @@ function Service() {
 					</form>
 				</div>
 
+				<div className="space-y-5 pt-10 w-1/2 h-1/2 md:mx-auto">
+					<div className=" bg-white shadow rounded-lg md:container md:mx-auto align-content: center overflow-y-scroll overscroll-auto box-content h-40 w-32 p-4 border-4">
+
+						<h3 className="text-xl border-b font-mono tracking-wide overline decoration-sky-500">Summary Here</h3>
+						<p className="indent-8 font-mono leading-relaxed text-left align-baseline break-all">
+
+							<span className="block"> </span>
+							
+							{summary}
+
+						</p>
+					</div>
+				</div>
+
 				<div className="max-w-3xl mx-auto">
 
 					{/* <form onSubmit={handleFetchSummary}>
@@ -209,11 +223,6 @@ function Service() {
 										Fetch Summary!
 							</button>
 					</form> */}
-
-
-					<p>Summary Displayed Below:</p>
-
-					<p>{summary}</p>
 
 				</div>
 
