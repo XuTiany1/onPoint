@@ -68,7 +68,11 @@ const getSummary = async(req, res, next) => {
     console.log(result);
 
     if (!result) res.send("Not found").status(404);
-    else res.send(result.summary).status(200);
+    else res.send({
+        gistSummary: result.gistSummary,
+        headlineSummary: result.headlineSummary,
+        bulletSummary: result.bulletSummary
+    }).status(200);
 
 
 }

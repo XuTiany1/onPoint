@@ -61,7 +61,9 @@ function Service() {
 
 // || ================== Fetching backend generated summary starts here ===================||
 
-	const [summary, setSummary] = useState('');
+	const [gistSummary, setgistSummary] = useState('');
+	const [headlineSummary, setheadlineSummary] = useState('');
+	const [bulletSummary, setbulletSummary] = useState('');
 
 	useInterval(() => {
 
@@ -70,18 +72,27 @@ function Service() {
 
 			console.log("Start to try to get summary");
 	
-			const baseURL = `http://localhost:1000/videoSummary/getSummary/${transactionId}`;
+			// const baseURL = `http://localhost:1000/videoSummary/getSummary/${transactionId}`;
+			const baseURL = `http://localhost:1000/videoSummary/getSummary/782423d0-3b9e-11ee-86a9-d5900191e1e2`;
 	
 			await axios.get(baseURL).then((response) => {
 	
 				console.log(response);
-				console.log(`this is the response.data: ${response.data}`)
+				console.log(`this is the response.data: ${response.data.gistSummary}`);
+				console.log(`this is the response.data: ${response.data.headlineSumary}`);
+				console.log(`this is the response.data: ${response.data.bulletSumary}`);
+
+
 
 		
-				if(response.data != ''){
-					console.log(response.data);
-					setSummary(response.data);
-					console.log(`The summary is found: ${summary}`);
+				if(response.gistSummary != '' && response.headlineSummary != '' && response.bulletSummary != ''){
+					setgistSummary(response.data.gistSummary);
+					setheadlineSummary(response.data.headlineSummary);
+					setbulletSummary(response.data.bulletSummary);
+					
+					console.log(`Gist summary is found: ${gistSummary}`);
+					console.log(`Headline summary is found: ${headlineSummary}`);
+					console.log(`Bullet summary is found: ${bulletSummary}`);
 				}else{
 					console.log("keep waiting!")
 				}
@@ -141,17 +152,26 @@ function Service() {
 					</form>
 				</div>
 
-				<div className="space-y-5 pt-10 w-1/2 h-1/2 md:mx-auto">
-					<div className=" bg-white shadow rounded-lg md:container md:mx-auto align-content: center overflow-y-scroll overscroll-auto box-content h-40 w-32 p-4 border-4">
+				<div className="space-y-8 pt-10 w-1/2 h-1/2 md:mx-auto">
+					<div className=" bg-white shadow rounded-lg md:container md:mx-auto align-content: center overflow-y-scroll overscroll-auto box-content h-50 w-32 p-4 border-4">
 
-						<h3 className="text-xl border-b font-mono tracking-wide overline decoration-sky-500">Summary Here</h3>
-						<p className="indent-8 font-mono leading-relaxed text-left align-baseline break-all">
+						<h3 className="text-xl border-b font-mono tracking-wide overline decoration-sky-500"><b>{gistSummary}</b></h3>
 
-							<span className="block"> </span>
-							
-							{summary}
+						<br/>
+
+
+
+						<p className="font-mono leading-relaxed text-left align-baseline break-all block whitespace-pre-line">
+
+							<i>{headlineSummary}</i>
 
 						</p>
+
+						<p className="font-sans leading-relaxed text-left align-baseline hyphens-auto break-all whitespace-pre-line">
+							{bulletSummary.split("-").join("\n -->")}
+						</p>
+
+						
 					</div>
 				</div>
 
