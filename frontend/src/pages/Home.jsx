@@ -31,15 +31,15 @@ function Home() {
                 <br></br>
                 <br></br>
                     <h2 className="text-5xl md:text-6xl font-extrabold leading-tighter aos-init aos-animate">
-                                Save <a className="underline decoration-sky-500 hover:decoration-red-500">Time.</a>
+                                Save <a className="underline decoration-blue-400 hover:decoration-red-500">Time.</a>
                     </h2>
                     <br></br>
                     <h2 className="text-5xl md:text-6xl font-extrabold leading-tighter mb-4 aos-init aos-animate">
-                                Be <a className="underline decoration-pink-500 hover:decoration-red-500">Accurate.</a>
+                                Be <a className="underline decoration-pink-400 hover:decoration-red-500">Accurate.</a>
                     </h2>
                     <br></br>
                     <h2 className="text-5xl md:text-6xl font-extrabold leading-tighter mb-8 aos-init aos-animate">
-                               Start Exploring <a className="underline decoration-purple-500 hover:decoration-red-500">OnPoint.</a>
+                               Start Exploring <a className="underline decoration-yellow-300 hover:decoration-red-500">OnPoint.</a>
                     </h2>
 
                     <Link to="../Service">
