@@ -1,7 +1,7 @@
 import React, { useState , useEffect, useCallback } from "react";
 import axios from 'axios';
 import { useInterval } from 'usehooks-ts';
-import PacmanLoader from "react-spinners/PacmanLoader";
+import GridLoader from "react-spinners/GridLoader";
 
 function Service() {
 
@@ -224,15 +224,17 @@ function Service() {
 						<div className="md:mx-auto align-content: center ">
 
 							<div className="flex justify-center items-center">
-								<PacmanLoader
+								<GridLoader
 								loading={loading}
 								size={40}
-								color="blue"/>
+								color="skyblue"/>
 							</div>
-
-							<h3 className="text-m border-b font-mono tracking-wide">
-							We are proccessing your video -- Thank you for your patience
 							<br></br>
+							<br></br>
+
+							<h3 className="text-xs border-b font-mono tracking-wide align-content: center">
+							We are proccessing your video -- Thank you for your patience
+							
 							</h3>
 
 						</div>
