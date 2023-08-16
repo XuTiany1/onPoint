@@ -131,6 +131,7 @@ function Service() {
 
 					<p className="text-xl text-gray-600 mb-8 aos-init aos-animate text-center" data-aos="zoom-y-out" data-aos-delay="150">
 						OnPoint provides concise summary from time-consuming video, so you only have to enter the enter the link and start saving time! 
+
 					</p>
 
 
