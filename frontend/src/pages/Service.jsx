@@ -1,10 +1,12 @@
 import React, { useState , useEffect, useCallback } from "react";
 import axios from 'axios';
 import { useInterval } from 'usehooks-ts';
+import PacmanLoader from "react-spinners/PacmanLoader";
 
 function Service() {
 
 	const [loading, setLoading] = useState(false);
+	const [summaryAvailable, setSummaryAvailable] = useState(false);
 
 
 // |||====================== Submitting a URL to backend starts here ====================|||
@@ -14,6 +16,7 @@ function Service() {
 
 	const handleSubmit = async (e) => {
 		setLoading(true);
+		setSummaryAvailable(false);
 		setTransactionId('');
 		e.preventDefault();
 
@@ -91,6 +94,7 @@ function Service() {
 				if(response.gistSummary != '' && response.headlineSummary != '' && response.bulletSummary != ''){
 
 					setLoading(false);
+					setSummaryAvailable(true);
 					setgistSummary(response.data.gistSummary);
 					setheadlineSummary(response.data.headlineSummary);
 					setbulletSummary(response.data.bulletSummary);
@@ -177,27 +181,66 @@ function Service() {
 
 
 				<div className="space-y-8 pt-10 w-1/2 h-1/2 md:mx-auto">
-					<div className=" bg-white shadow rounded-lg md:container md:mx-auto align-content: center overflow-y-scroll overscroll-auto box-content h-50 w-32 p-4 border-4">
 
-						<h3 className="text-xl border-b font-mono tracking-wide overline decoration-sky-500"><b>{gistSummary}</b></h3>
+					{
+					summaryAvailable && 
+						<div className=" bg-white shadow rounded-lg md:container md:mx-auto align-content: center overflow-y-scroll overscroll-auto box-content h-50 w-32 p-4 border-4">
+							<h3 className="text-xl border-b font-mono tracking-wide overline decoration-sky-500"><b>{gistSummary}</b></h3>
+					
+							<br/>
+					
+					
+					
+							<p className="font-mono leading-relaxed text-left align-baseline break-all block whitespace-pre-line">
+					
+								<i>{headlineSummary}</i>
+					
+							</p>
+					
+							<p className="font-sans leading-relaxed text-left align-baseline hyphens-auto break-all whitespace-pre-line">
+								{bulletSummary.split("-").join("\n -->")}
+							</p>
+								
+						</div>
+								
+					}
+					{
+					!summaryAvailable && !loading &&
+						<div className="md:mx-auto align-content: center ">
+							<h3 className="text-l border-b font-mono tracking-wide"><b>{gistSummary}
+							</b>
+							Summarization speed depends on the video length. 
+							<br></br>
+							A typical 10 minute video takes about 2 minutes.
+							
+							</h3>
 
-						<br/>
+								
+						</div>
+								
+					}
+					{
+					!summaryAvailable && loading &&
+						<div className="md:mx-auto align-content: center ">
 
+							<div className="flex justify-center items-center">
+								<PacmanLoader
+								loading={loading}
+								size={40}
+								color="blue"/>
+							</div>
 
+							<h3 className="text-m border-b font-mono tracking-wide">
+							We are proccessing your video -- Thank you for your patience
+							<br></br>
+							</h3>
 
-						<p className="font-mono leading-relaxed text-left align-baseline break-all block whitespace-pre-line">
+						</div>
+								
+					}
 
-							<i>{headlineSummary}</i>
-
-						</p>
-
-						<p className="font-sans leading-relaxed text-left align-baseline hyphens-auto break-all whitespace-pre-line">
-							{bulletSummary.split("-").join("\n -->")}
-						</p>
-
-						
-					</div>
 				</div>
+
 
 				<div className="max-w-3xl mx-auto">
 
