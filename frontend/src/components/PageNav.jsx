@@ -30,9 +30,6 @@ function PageNav() {
                         <NavLink to="/">Home</NavLink>
                     </li>
                     <li className='font-semibold my-7 md:my-0 md:ml-8'>
-                        <NavLink to="/about">About</NavLink>
-                    </li>
-                    <li className='font-semibold my-7 md:my-0 md:ml-8'>
                         <NavLink to="/service">Service</NavLink>
                     </li>
 
