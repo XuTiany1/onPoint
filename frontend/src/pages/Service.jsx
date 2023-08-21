@@ -209,9 +209,9 @@ function Service() {
 						<div className="md:mx-auto align-content: center ">
 							<h3 className="text-l border-b font-mono tracking-wide"><b>{gistSummary}
 							</b>
-							Summarization speed depends on the video length. 
+							Summarization speed depends on the video length...
 							<br></br>
-							A typical 10 minute video takes about 2 minutes.
+							A typical 10 minute video takes about 2 minutes...
 							
 							</h3>
 
