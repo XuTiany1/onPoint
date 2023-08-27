@@ -4,8 +4,14 @@
 
 
 ## What is onPoint?
-onPoint is a straight-forward summarization web-app that aims to improve productivity by condensing long-boring-repetitive and time-consuming online-videos into concise information keypoints!
+onPoint is a **straight-forward summarization web-app** that aims to **improve productivity** by condensing long-boring-repetitive and time-consuming online-videos into concise information keypoints!
 
+For each video, onPoint provides three types of summaries:
+1. headline summary
+2. one-sentence summary
+3. bullet-point summary
+
+## How is it built?
 onPoint is built with:
 - React
 - Node js
@@ -20,9 +26,7 @@ Follow these simple steps to start summarizing with onPoint:
 3. That's all!
 
 ## Demonstration
-
-
-
+https://github.com/XuTiany1/onPoint/assets/76981871/3b0a46b1-5054-42fb-acdd-7d8ef6a5712b
 
 
 ## How to run it locally?
