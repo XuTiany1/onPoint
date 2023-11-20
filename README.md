@@ -27,8 +27,11 @@ Follow these simple steps to start summarizing with onPoint:
 3. That's all!
 
 ## Demonstration
-https://github.com/XuTiany1/onPoint/assets/76981871/3b0a46b1-5054-42fb-acdd-7d8ef6a5712b
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=YOUTUBE_VIDEO_ID_HERE
+" target="_blank"><img src="http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg" 
+alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/8VBlOwuoFNg?si=3RhC5c4xZ3BuSsXu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ## How to run it locally?
 1. Git clone the repository
