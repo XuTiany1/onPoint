@@ -27,8 +27,7 @@ Follow these simple steps to start summarizing with onPoint:
 3. That's all!
 
 ## Demonstration
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=YOUTUBE_VIDEO_ID_HERE
-" target="_blank"><img src="http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg" 
+<a href="https://www.youtube.com/embed/8VBlOwuoFNg?si=3RhC5c4xZ3BuSsXu" target="_blank"><img src="http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg" 
 alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/8VBlOwuoFNg?si=3RhC5c4xZ3BuSsXu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
