@@ -1,6 +1,7 @@
 # onPoint
 
-<img width="837" alt="onPoint_demo1_pic" width="10%" height="auto" src="https://github.com/XuTiany1/onPoint/assets/76981871/ec4cdf13-c046-49ab-934d-5e2cc61ac5c3" >
+<img width="837" alt="onPoint_demo1_pic" src="https://github.com/XuTiany1/onPoint/assets/76981871/a76154ea-ef89-43e4-a0ab-27aefbfe642c">
+
 
 
 ## What is onPoint?
