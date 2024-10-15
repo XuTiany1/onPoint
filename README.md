@@ -24,13 +24,11 @@ onPoint is built with:
 Follow these simple steps to start summarizing with onPoint:
 1. Head to onPoint and click on "Service" or the "Start Now!" button
 2. Upload your youtube video link
-3. That's all!
+3. That's all! You will see the generated video summary after the backend completes the process.
 
 ## Demonstration
 
-
 https://github.com/XuTiany1/onPoint/assets/76981871/8a2e5d17-802e-4553-bd76-829c677a0321
-
 
 
 ## How to run it locally?
