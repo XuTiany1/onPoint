@@ -3,7 +3,6 @@
 <img width="837" alt="onPoint_demo1_pic" src="https://github.com/XuTiany1/onPoint/assets/76981871/a76154ea-ef89-43e4-a0ab-27aefbfe642c">
 
 
-
 ## What is onPoint?
 onPoint is a **straight-forward summarization web-app** that aims to **improve productivity** by condensing long-boring-repetitive and time-consuming online-videos into concise information keypoints!
 
